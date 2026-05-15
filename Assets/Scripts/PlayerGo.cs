@@ -96,6 +96,24 @@ public class PlayerMovement : MonoBehaviour
         // Движение относительно поворота персонажа
         Vector3 move = transform.right * horizontal + transform.forward * vertical;
         controller.Move(move * currentSpeed * Time.deltaTime);
+
+        //анимация ходьбы, бега
+        if (move != new Vector3(0,0,0))
+        {
+            if (isRunning)
+            {
+                animator.SetBool("IsRunning", true);
+            }
+            else
+            {
+                animator.SetBool("IsRunning", false);
+            }
+            animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
+        }
     }
 
     void HandleJump()
